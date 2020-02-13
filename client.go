@@ -10,6 +10,15 @@ import (
 	"k8s.io/client-go/rest"
 )
 
+func NewManifest(pathname string, config *rest.Config, opts ...mf.Option) (mf.Manifest, error) {
+	client, err := NewClient(config)
+	if err != nil {
+		return mf.Manifest{}, err
+	}
+	opts = append(opts, mf.UseClient(client))
+	return mf.NewManifest(pathname, opts...)
+}
+
 func NewClient(config *rest.Config) (mf.Client, error) {
 	client, err := dynamic.NewForConfig(config)
 	if err != nil {

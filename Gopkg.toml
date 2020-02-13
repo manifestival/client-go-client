@@ -26,7 +26,7 @@
 
 
 [[constraint]]
-  branch = "functional-options"
+  branch = "consolidated"
   name = "github.com/manifestival/manifestival"
 
 [[constraint]]
