@@ -15,8 +15,7 @@ func NewManifest(pathname string, config *rest.Config, opts ...mf.Option) (mf.Ma
 	if err != nil {
 		return mf.Manifest{}, err
 	}
-	opts = append(opts, mf.UseClient(client))
-	return mf.NewManifest(pathname, opts...)
+	return mf.NewManifest(pathname, append(opts, mf.UseClient(client))...)
 }
 
 func NewClient(config *rest.Config) (mf.Client, error) {

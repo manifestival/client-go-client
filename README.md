@@ -1,24 +1,26 @@
 # client-go-client
 
-A client-go implementation of the Manifestival Client 
+A [client-go](https://github.com/kubernetes/client-go) implementation
+of the [Manifestival](https://github.com/manifestival/manifestival)
+`Client`.
 
 Usage
 -----
 
 ```go
 import (
-	mfc "github.com/manifestival/client-go-client"
-	mf  "github.com/manifestival/manifestival"
-	"k8s.io/client-go/rest"
+    mfc "github.com/manifestival/client-go-client"
+    mf  "github.com/manifestival/manifestival"
+    "k8s.io/client-go/rest"
 )
 
 func main() {
     var config *rest.Config = ...
     
     manifest, err := mfc.NewManifest("dir/", config, mf.Recursive)
-	if err != nil {
-		panic("Failed to load manifest")
-	}
+    if err != nil {
+        panic("Failed to load manifest")
+    }
     
     manifest.ApplyAll()
 }
