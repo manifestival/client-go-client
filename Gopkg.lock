@@ -78,15 +78,15 @@
   revision = "ab8a2e0c74be"
 
 [[projects]]
-  branch = "master"
-  digest = "1:a691c2e51035b0833b95974fd8172f0b534f5f0a3b2688340651c920a1f8d4e2"
+  digest = "1:4d67892f272491cc3a7c9bcafa8baeee5af178060a541c304def117c017d5eec"
   name = "github.com/manifestival/manifestival"
   packages = [
     ".",
     "patch",
   ]
   pruneopts = "UT"
-  revision = "17b3d45d5e509af3146b934e9d9ca4cd90ed79c4"
+  revision = "f5dd205675d3301a65eeb90aa4c7f793b8c0897f"
+  version = "v0.1.0"
 
 [[projects]]
   digest = "1:33422d238f147d247752996a26574ac48dcf472976eda7f5134015f06bf16563"
