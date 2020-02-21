@@ -383,6 +383,7 @@
   input-imports = [
     "github.com/manifestival/manifestival",
     "github.com/operator-framework/operator-sdk/pkg/restmapper",
+    "k8s.io/apimachinery/pkg/api/errors",
     "k8s.io/apimachinery/pkg/api/meta",
     "k8s.io/apimachinery/pkg/apis/meta/v1",
     "k8s.io/apimachinery/pkg/apis/meta/v1/unstructured",

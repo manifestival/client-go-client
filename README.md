@@ -17,18 +17,18 @@ import (
 func main() {
     var config *rest.Config = ...
     
-    f, err := mfc.NewManifest("file.yaml", config)
+    manifest, err := mfc.NewManifest("file.yaml", config)
     if err != nil {
         panic("Failed to load manifest")
     }
-    f.ApplyAll()
+    manifest.Apply()
 
     // a slightly more complex example
     m, err := mf.ManifestFrom(mf.Recursive("dir/"), mf.UseClient(mfc.NewClient(config)))
     if err != nil {
         panic("Failed to load manifest")
     }
-    m.ApplyAll()
+    m.Apply()
 }
 ```
 
