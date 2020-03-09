@@ -78,7 +78,8 @@
   revision = "ab8a2e0c74be"
 
 [[projects]]
-  digest = "1:2575736731bd3046cf6bd5a08a7d694a30a6be8b4af230470f1ad4239bb7d0c3"
+  branch = "master"
+  digest = "1:982367f8aabab5e69c08416597055d15614c3a8c037098c94cc1a3c863b26eab"
   name = "github.com/manifestival/manifestival"
   packages = [
     ".",
@@ -86,8 +87,7 @@
     "sources",
   ]
   pruneopts = "UT"
-  revision = "062c519a505b425bf0990e7f78e06568b2756b89"
-  version = "v0.2.0"
+  revision = "996a3dc7d51032bcb1880bae8b211c8ce219320e"
 
 [[projects]]
   digest = "1:33422d238f147d247752996a26574ac48dcf472976eda7f5134015f06bf16563"
