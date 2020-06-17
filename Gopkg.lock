@@ -79,7 +79,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:06a0d9b156b459a988b70c9f5d7ce3dc0a0231fe5329eb56dd1cfd7704c6fa19"
+  digest = "1:e4b51ce8ddba39c971599a1bef71b9146ac1158854662b4737bf3cc6bc633e25"
   name = "github.com/manifestival/manifestival"
   packages = [
     ".",
@@ -88,7 +88,7 @@
     "sources",
   ]
   pruneopts = "UT"
-  revision = "15996b119a3d7b7ea059528df3dbbbf4f5b93017"
+  revision = "915d45cf3eac158be2106e4d795bf4da7c5761ae"
 
 [[projects]]
   digest = "1:33422d238f147d247752996a26574ac48dcf472976eda7f5134015f06bf16563"
@@ -325,11 +325,12 @@
   version = "kubernetes-1.15.4"
 
 [[projects]]
-  digest = "1:ff2986eff089917e27d5fbc9982caffb8f092861021d88ca9aba388e17f1b316"
+  digest = "1:6e449180b42195ae8597ad1ec188d8d3083e9edb9420d67c0a89ebf2b92034c0"
   name = "k8s.io/client-go"
   packages = [
     "discovery",
     "dynamic",
+    "dynamic/fake",
     "kubernetes/scheme",
     "pkg/apis/clientauthentication",
     "pkg/apis/clientauthentication/v1alpha1",
@@ -339,6 +340,7 @@
     "rest",
     "rest/watch",
     "restmapper",
+    "testing",
     "tools/clientcmd/api",
     "tools/metrics",
     "transport",
@@ -399,7 +401,9 @@
     "k8s.io/apimachinery/pkg/api/meta",
     "k8s.io/apimachinery/pkg/apis/meta/v1",
     "k8s.io/apimachinery/pkg/apis/meta/v1/unstructured",
+    "k8s.io/apimachinery/pkg/runtime",
     "k8s.io/client-go/dynamic",
+    "k8s.io/client-go/dynamic/fake",
     "k8s.io/client-go/rest",
     "sigs.k8s.io/controller-runtime/pkg/client/apiutil",
   ]
