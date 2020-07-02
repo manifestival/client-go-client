@@ -3,6 +3,7 @@ package client
 import (
 	mfDynamic "github.com/manifestival/client-go-client/pkg/dynamic"
 	mf "github.com/manifestival/manifestival"
+	. "github.com/manifestival/manifestival/pkg/client"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
@@ -20,7 +21,7 @@ func NewManifest(pathname string, config *rest.Config, opts ...mf.Option) (mf.Ma
 }
 
 // NewClient returns a manifestival client based on a rest config
-func NewClient(config *rest.Config) (mf.Client, error) {
+func NewClient(config *rest.Config) (Client, error) {
 	resourceGetter, err := mfDynamic.NewForConfig(config)
 	if err != nil {
 		return nil, err
@@ -29,7 +30,7 @@ func NewClient(config *rest.Config) (mf.Client, error) {
 }
 
 // NewUnsafeDynamicClient returns a manifestival client based on dynamic kubernetes client
-func NewUnsafeDynamicClient(client dynamic.Interface) (mf.Client, error) {
+func NewUnsafeDynamicClient(client dynamic.Interface) (Client, error) {
 	resourceGetter := mfDynamic.NewUnsafeResourceGetter(client)
 	return &clientGoClient{resourceGetter: resourceGetter}, nil
 }
@@ -39,34 +40,34 @@ type clientGoClient struct {
 }
 
 // verify implementation
-var _ mf.Client = (*clientGoClient)(nil)
+var _ Client = (*clientGoClient)(nil)
 
-func (c *clientGoClient) Create(obj *unstructured.Unstructured, options ...mf.ApplyOption) error {
+func (c *clientGoClient) Create(obj *unstructured.Unstructured, options ...ApplyOption) error {
 	resource, err := c.resourceGetter.ResourceInterface(obj)
 	if err != nil {
 		return err
 	}
-	opts := mf.ApplyWith(options)
+	opts := ApplyWith(options)
 	_, err = resource.Create(obj, *opts.ForCreate)
 	return err
 }
 
-func (c *clientGoClient) Update(obj *unstructured.Unstructured, options ...mf.ApplyOption) error {
+func (c *clientGoClient) Update(obj *unstructured.Unstructured, options ...ApplyOption) error {
 	resource, err := c.resourceGetter.ResourceInterface(obj)
 	if err != nil {
 		return err
 	}
-	opts := mf.ApplyWith(options)
+	opts := ApplyWith(options)
 	_, err = resource.Update(obj, *opts.ForUpdate)
 	return err
 }
 
-func (c *clientGoClient) Delete(obj *unstructured.Unstructured, options ...mf.DeleteOption) error {
+func (c *clientGoClient) Delete(obj *unstructured.Unstructured, options ...DeleteOption) error {
 	resource, err := c.resourceGetter.ResourceInterface(obj)
 	if err != nil {
 		return err
 	}
-	opts := mf.DeleteWith(options)
+	opts := DeleteWith(options)
 	err = resource.Delete(obj.GetName(), opts.ForDelete)
 	if apierrors.IsNotFound(err) && opts.IgnoreNotFound {
 		return nil

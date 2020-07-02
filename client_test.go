@@ -5,6 +5,7 @@ import (
 
 	mfClient "github.com/manifestival/client-go-client"
 	mf "github.com/manifestival/manifestival"
+	"github.com/manifestival/manifestival/pkg/sources"
 
 	"k8s.io/apimachinery/pkg/runtime"
 	kFake "k8s.io/client-go/dynamic/fake"
@@ -20,7 +21,7 @@ func TestNewUnsafeDynamicClient(t *testing.T) {
 		t.Fatalf("received client creation error %v", err)
 	}
 
-	source := mf.Slice{}
+	source := sources.Slice{}
 	_, err = mf.ManifestFrom(source, mf.UseClient(client))
 
 	if err != nil {
