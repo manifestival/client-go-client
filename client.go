@@ -2,6 +2,7 @@ package client
 
 import (
 	"context"
+
 	mfDynamic "github.com/manifestival/client-go-client/pkg/dynamic"
 	mf "github.com/manifestival/manifestival"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
@@ -42,43 +43,43 @@ type clientGoClient struct {
 // verify implementation
 var _ mf.Client = (*clientGoClient)(nil)
 
-func (c *clientGoClient) Create(obj *unstructured.Unstructured, options ...mf.ApplyOption) error {
+func (c *clientGoClient) Create(ctx context.Context, obj *unstructured.Unstructured, options ...mf.ApplyOption) error {
 	resource, err := c.resourceGetter.ResourceInterface(obj)
 	if err != nil {
 		return err
 	}
 	opts := mf.ApplyWith(options)
-	_, err = resource.Create(context.TODO(), obj, *opts.ForCreate)
+	_, err = resource.Create(ctx, obj, *opts.ForCreate)
 	return err
 }
 
-func (c *clientGoClient) Update(obj *unstructured.Unstructured, options ...mf.ApplyOption) error {
+func (c *clientGoClient) Update(ctx context.Context, obj *unstructured.Unstructured, options ...mf.ApplyOption) error {
 	resource, err := c.resourceGetter.ResourceInterface(obj)
 	if err != nil {
 		return err
 	}
 	opts := mf.ApplyWith(options)
-	_, err = resource.Update(context.TODO(), obj, *opts.ForUpdate)
+	_, err = resource.Update(ctx, obj, *opts.ForUpdate)
 	return err
 }
 
-func (c *clientGoClient) Delete(obj *unstructured.Unstructured, options ...mf.DeleteOption) error {
+func (c *clientGoClient) Delete(ctx context.Context, obj *unstructured.Unstructured, options ...mf.DeleteOption) error {
 	resource, err := c.resourceGetter.ResourceInterface(obj)
 	if err != nil {
 		return err
 	}
 	opts := mf.DeleteWith(options)
-	err = resource.Delete(context.TODO(), obj.GetName(), *opts.ForDelete)
+	err = resource.Delete(ctx, obj.GetName(), *opts.ForDelete)
 	if apierrors.IsNotFound(err) && opts.IgnoreNotFound {
 		return nil
 	}
 	return err
 }
 
-func (c *clientGoClient) Get(obj *unstructured.Unstructured) (*unstructured.Unstructured, error) {
+func (c *clientGoClient) Get(ctx context.Context, obj *unstructured.Unstructured) (*unstructured.Unstructured, error) {
 	resource, err := c.resourceGetter.ResourceInterface(obj)
 	if err != nil {
 		return nil, err
 	}
-	return resource.Get(context.TODO(), obj.GetName(), metav1.GetOptions{})
+	return resource.Get(ctx, obj.GetName(), metav1.GetOptions{})
 }
