@@ -11,6 +11,8 @@ Usage
 
 ```go
 import (
+    "context"
+
     mfc "github.com/manifestival/client-go-client"
     mf  "github.com/manifestival/manifestival"
     "k8s.io/client-go/rest"
@@ -18,12 +20,13 @@ import (
 
 func main() {
     var config *rest.Config = ...
+    ctx := context.Background()
 
     manifest, err := mfc.NewManifest("file.yaml", config)
     if err != nil {
         panic("Failed to load manifest")
     }
-    manifest.Apply()
+    manifest.Apply(ctx)
 
     // a slightly more complex example
     client, _ := mfc.NewClient(config)
@@ -31,7 +34,7 @@ func main() {
     if err != nil {
         panic("Failed to load manifest")
     }
-    m.Apply()
+    m.Apply(ctx)
 }
 ```
 
